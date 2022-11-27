@@ -3,13 +3,32 @@ from django.shortcuts import render
 from .models import todo_list
 from .forms import TodoForm
 from django.views.generic import ListView
+from django.views.generic.edit import UpdateView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
 
 
 # Create your views here.
+class HomeDetailView(DetailView):
+    model = todo_list
+    template_name = 'details.html'
+    context_object_name = 'obj'
+
+
 class HomeListView(ListView):
     model = todo_list
     context_object_name = 'obj'
     template_name = 'home.html'
+
+
+class HomeUpdateView(UpdateView):
+    model = todo_list
+    template_name = 'update.html'
+    context_object_name = 'obj'
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse_lazy('homedetailview', kwargs={'pk': self.object.id})
 
 
 def home(request):
