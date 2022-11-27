@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container-fluid m-4">
+    <div class="card" style="width:25%;background-color:black;color:white">
+      <div class="card-header">
+          <h4>{{obj.name}}</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{obj.priority}}</h5>
+        <h5 class="card-text">{{obj.date}}</h5>
+
+      </div>
+    </div>
+</div>
+{% endblock %}

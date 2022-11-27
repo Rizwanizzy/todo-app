@@ -1,10 +1,16 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import todo_list
-
+from .forms import TodoForm
+from django.views.generic import ListView
 
 
 # Create your views here.
+class HomeListView(ListView):
+    model = todo_list
+    context_object_name = 'obj'
+    template_name = 'home.html'
+
 
 def home(request):
     if request.method == 'POST':
@@ -20,5 +26,3 @@ def home(request):
             print('added successfully')
     obj = todo_list.objects.all()
     return render(request, 'home.html', {'obj': obj})
-
-
