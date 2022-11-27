@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import todo_list
 from .forms import TodoForm
 from django.views.generic import ListView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 
@@ -13,6 +13,13 @@ class HomeDetailView(DetailView):
     model = todo_list
     template_name = 'details.html'
     context_object_name = 'obj'
+
+
+class HomeDeleteView(DeleteView):
+    model = todo_list
+    template_name = 'delete.html'
+    success_url = reverse_lazy('homelistview')
+
 
 
 class HomeListView(ListView):
