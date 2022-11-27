@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="row">
+    <div class="banner">
+            <div class="banner-text">
+            <h2 >TODO</h2>
+            </div>
+    </div>
+
+    <div class="container col-md-2 mt-3" >
+        <h3>TASK</h3><hr>
+    <div class="form p-3" style="border-style: solid;height:430px; width:400px">
+    <form action="" method="post">
+        {% csrf_token %}
+
+      <div class="form-group">
+
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="Enter Name">
+      </div>
+      <div class="form-group">
+        <label>Priority</label>
+        <input type="number" class="form-control" name="priority" placeholder="Select Priority"><br>
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" class="form-control" name="date" placeholder="Select Date"><br>
+      </div>
+      <button type="submit" class="btn btn-secondary">Submit</button><br>
+    </form>
+        <br>
+        {% if messages %}
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
+        {% endif %}
+    </div>
+    </div>
+    <div class="container col-md-4 mt-3">
+        <h3>LIST</h3><hr>
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Priority</th>
+              <th class="text-center" scope="col">Date</th>
+              <th class="text-center" scope="col">Action</th>
+            </tr>
+          </thead>
+          {% for i in obj %}
+          <tbody>
+            <tr>
+              <td>{{i.name}}</td>
+              <td>{{i.priority}}</td>
+              <td>{{i.date}}</td>
+              <td><a class="btn btn-success" href="{% url 'homedeleteview' i.id %}">Done</a>
+                  <a class="btn btn-warning" href="{% url 'homeupdateview' i.id %}">Update</a></td>
+            </tr>
+
+          </tbody>
+          {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
